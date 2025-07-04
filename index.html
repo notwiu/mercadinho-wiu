@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mercadinho Wiu - Loja Virtual</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- cabeçalho -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <i class="fas fa-shopping-basket"></i>
+        <h1>Mercadinho do <span>Wiu</span></h1>
+      </div>
+      <div id="cart-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+        <span class="cart-text">Carrinho</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- conteúdo principal -->
+  <div class="main-container">
+    <section id="filtros">
+      <div class="search-container">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" placeholder="Buscar produtos...">
+      </div>
+      <div class="filter-container">
+        <label>Filtrar por:</label>
+        <select id="filtro-categoria">
+          <option value="Todos">Todos</option>
+          <option value="Hortifruti">Hortifruti</option>
+          <option value="Grãos">Grãos</option>
+          <option value="Limpeza">Limpeza</option>
+          <option value="Laticínios">Laticínios</option>
+          <option value="Bebidas">Bebidas</option>
+        </select>
+        <select id="sort-by">
+          <option value="padrao">Ordenar por</option>
+          <option value="preco-asc">Preço: menor para maior</option>
+          <option value="preco-desc">Preço: maior para menor</option>
+          <option value="nome-asc">Nome: A-Z</option>
+          <option value="nome-desc">Nome: Z-A</option>
+        </select>
+      </div>
+    </section>
+
+    <main id="product-list"></main>
+  </div>
+
+  <!-- carrinho -->
+  <aside id="cart">
+    <div class="cart-header">
+      <h2><i class="fas fa-shopping-cart"></i> Seu Carrinho</h2>
+      <button id="close-cart"><i class="fas fa-times"></i></button>
+    </div>
+    
+    <div class="cart-content">
+      <ul id="cart-items"></ul>
+      <div id="empty-cart">
+        <i class="fas fa-shopping-basket"></i>
+        <p>Seu carrinho está vazio</p>
+      </div>
+    </div>
+    
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">R$ 0,00</span>
+        </div>
+        <div class="summary-row">
+          <span>Entrega</span>
+          <span id="delivery-fee">Grátis</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span id="cart-total">R$ 0,00</span>
+        </div>
+      </div>
+      <button id="checkout-btn" class="disabled" disabled>Finalizar Compra</button>
+    </div>
+  </aside>
+
+  <!-- modal de pagamento -->
+  <div id="checkout-modal" class="modal">
+    <div class="modal-content">
+      <button id="close-checkout" class="close-modal">&times;</button>
+      <h2><i class="fas fa-cash-register"></i> Finalizar Compra</h2>
+      
+      <div class="checkout-summary">
+        <div class="summary-item">
+          <span>Subtotal</span>
+          <span id="checkout-subtotal">R$ 0,00</span>
+        </div>
+        <div class="summary-item">
+          <span>Frete</span>
+          <div class="frete-container">
+            <input type="text" id="cep-input" placeholder="Digite seu CEP" maxlength="9">
+            <button id="calcular-frete-btn">Calcular</button>
+          </div>
+        </div>
+        <div class="summary-item frete-value" style="display: none;">
+          <span>Valor do Frete</span>
+          <span id="frete-valor">R$ 0,00</span>
+        </div>
+        <div class="summary-item total">
+          <span>Total</span>
+          <span id="checkout-total">R$ 0,00</span>
+        </div>
+      </div>
+      
+      <h3>Método de Pagamento</h3>
+      <div class="payment-methods">
+        <div class="payment-option active" data-method="pix">
+          <i class="fab fa-pix"></i>
+          <span>PIX</span>
+        </div>
+        <div class="payment-option" data-method="credit">
+          <i class="far fa-credit-card"></i>
+          <span>Crédito</span>
+        </div>
+        <div class="payment-option" data-method="debit">
+          <i class="fas fa-credit-card"></i>
+          <span>Débito</span>
+        </div>
+        <div class="payment-option" data-method="boleto">
+          <i class="fas fa-barcode"></i>
+          <span>Boleto</span>
+        </div>
+      </div>
+      
+      <div class="payment-details" id="payment-details"></div>
+      
+      <button id="confirm-purchase" class="btn-primary">
+        <i class="fas fa-check-circle"></i> Confirmar Pagamento
+      </button>
+    </div>
+  </div>
+
+  <!-- tela de confirmação -->
+  <div id="confirmation-screen" class="confirmation">
+    <div class="confirmation-content">
+      <div class="checkmark-animation">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2>Compra Finalizada!</h2>
+      <p>Obrigado por comprar no Mercadinho Wiu</p>
+      <p>Seu pedido #<span id="order-number">12345</span> foi recebido.</p>
+    </div>
+  </div>
+
+  <div class="cart-overlay"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
