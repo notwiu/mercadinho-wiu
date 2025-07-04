@@ -188,7 +188,7 @@ function exibirProdutos(categoria = "Todos", searchTerm = "", sortOption = "padr
         <img src="${produto.imagem}" alt="${produto.nome}" class="product-img">
         <h3>${produto.nome}</h3>
         <p class="product-category">${produto.categoria}</p>
-        <p class="product-price">R$ ${produto.preco.toFixed(2)}</p>
+        <p class="product-price">R$ ${aplicarPromocao(produto).toFixed(2)} ${produto.categoria === 'Hortifruti' ? '<span class="discount-badge">-10%</span>' : ''}</p>
         <button ${produto.estoque <= 0 ? 'disabled' : ''} class="${inCart ? 'in-cart' : ''}">
           ${inCart ? '<i class="fas fa-check"></i> Adicionado' : 
             produto.estoque <= 0 ? 'Esgotado' : '<i class="fas fa-plus"></i> Adicionar'}
@@ -833,3 +833,10 @@ sortBy.addEventListener('change', () => {
 window.removerItem = removerItem;
 window.atualizarQuantidade = atualizarQuantidade;
 
+// aplicar promoção de 10% para hortifruti
+function aplicarPromocao(produto) {
+  if (produto.categoria === 'Hortifruti') {
+    return produto.preco * 0.9; // 10% de desconto
+  }
+  return produto.preco;
+}
