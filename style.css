@@ -925,3 +925,49 @@ header {
   border-radius: 4px;
   margin-left: 0.5rem;
 }
+
+.notification-bar {
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.notification-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.notification-bar i {
+    font-size: 16px;
+}
+
+.notification-bar strong {
+    font-weight: 700;
+    background-color: rgba(255,255,255,0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 3px;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .notification-bar {
+        font-size: 12px;
+        padding: 8px 0;
+    }
+    
+    .notification-content {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
