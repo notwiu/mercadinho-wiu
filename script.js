@@ -1,9 +1,9 @@
-// Banco de dados de produtos
+// lista de produtos do mercadinho
 const produtos = [
   { 
     id: 1,
-    nome: "Banana Prata", 
-    preco: 4.99, 
+    nome: "Banana Prata 1kg", 
+    preco: 7.69, 
     imagem: "https://images.tcdn.com.br/img/img_prod/753894/muda_de_banana_prata_altura_de_0_40_cm_a_0_80_cm_391_2_4a090211a2ba9380b331ba1ce945ba08.jpg", 
     categoria: "Hortifruti",
     descricao: "Banana prata fresca, pacote com 5 unidades",
@@ -11,8 +11,8 @@ const produtos = [
   },
   { 
     id: 2,
-    nome: "Arroz Integral", 
-    preco: 19.90, 
+    nome: "Arroz Integral 1kg", 
+    preco: 12.90, 
     imagem: "https://ibassets.com.br/ib.item.image.large/l-b7c49fe1b3b348649f3e07ad024fefb5.jpeg", 
     categoria: "Grãos",
     descricao: "Arroz integral tipo 1, pacote 5kg",
@@ -20,8 +20,8 @@ const produtos = [
   },
   { 
     id: 3,
-    nome: "Sabão em Pó", 
-    preco: 8.50, 
+    nome: "Sabão em Pó 1kg", 
+    preco: 13.13, 
     imagem: "https://cdn.awsli.com.br/600x450/2732/2732782/produto/263363238/sabao-em-po-aomo-lavagem-perfeita-800g-t5shzn32zv.jpg", 
     categoria: "Limpeza",
     descricao: "Sabão em pó para roupas, 1kg",
@@ -29,8 +29,8 @@ const produtos = [
   },
   { 
     id: 4,
-    nome: "Leite Integral", 
-    preco: 6.75, 
+    nome: "Leite Integral 380g", 
+    preco: 15.99, 
     imagem: "https://m.media-amazon.com/images/I/61eRaa65D6L.jpg", 
     categoria: "Laticínios",
     descricao: "Leite integral pasteurizado, caixa 1L",
@@ -38,8 +38,8 @@ const produtos = [
   },
   { 
     id: 5,
-    nome: "Maçã Fuji", 
-    preco: 7.80, 
+    nome: "Maçã Fuji 300g", 
+    preco: 4.50, 
     imagem: "https://obahortifruti.vtexassets.com/arquivos/ids/4250277/Maca-Fuji.jpg?v=638144112304430000", 
     categoria: "Hortifruti",
     descricao: "Maçã Fuji importada, pacote com 6 unidades",
@@ -47,8 +47,8 @@ const produtos = [
   },
   { 
     id: 6,
-    nome: "Feijão Carioca", 
-    preco: 12.50, 
+    nome: "Feijão Carioca 1kg", 
+    preco: 8.50, 
     imagem: "https://ibassets.com.br/ib.item.image.large/l-b15349c79e694c919b8d0e86514a5c24.jpeg", 
     categoria: "Grãos",
     descricao: "Feijão carioca tipo 1, pacote 1kg",
@@ -56,8 +56,8 @@ const produtos = [
   },
   { 
     id: 7,
-    nome: "Água Sanitária", 
-    preco: 5.90, 
+    nome: "Água Sanitária 2L", 
+    preco: 10.90, 
     imagem: "https://mercantilatacado.vtexassets.com/arquivos/ids/171637-800-auto?v=638349582486370000&width=800&height=auto&aspect=true", 
     categoria: "Limpeza",
     descricao: "Água sanitária concentrada, frasco 1L",
@@ -65,8 +65,8 @@ const produtos = [
   },
   { 
     id: 8,
-    nome: "Queijo Mussarela", 
-    preco: 24.90, 
+    nome: "Queijo Mussarela 150g", 
+    preco: 8.99, 
     imagem: "https://mercantilnovaera.vtexassets.com/arquivos/ids/216729/Queijo-Mussarela-ITALAC-Fatiado-Pacote-150g.jpg?v=638515724565100000", 
     categoria: "Laticínios",
     descricao: "Queijo mussarela fatiado, pacote 300g",
@@ -75,7 +75,7 @@ const produtos = [
   { 
     id: 9,
     nome: "Coca Cola 2L", 
-    preco: 8.25, 
+    preco: 11.25, 
     imagem: "https://zaffari.vtexassets.com/arquivos/ids/251444/1095276-00.jpg?v=638560654395300000", 
     categoria: "Bebidas",
     descricao: "Refrigerante de cola, garrafa 2L",
