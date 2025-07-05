@@ -116,12 +116,31 @@ const confirmPurchaseBtn = document.getElementById('confirm-purchase');
 const confirmationScreen = document.getElementById('confirmation-screen');
 const paymentOptions = document.querySelectorAll('.payment-option');
 const paymentDetails = document.getElementById('payment-details');
+const validCoupons = {
+  "BEMVINDO10": { discount: 10, description: "10% de desconto" },
+  "FRETEGRATIS": { discount: 0, freeShipping: true, description: "Frete grátis" }
+};
 
 // Carrinho de compras
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cart = JSON.parse(localStorage.getItem('cart')) || []
+let appliedCoupon = null;
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
+  try {
+    const storedCoupon = localStorage.getItem('appliedCoupon');
+    if (storedCoupon) appliedCoupon = JSON.parse(storedCoupon);
+    if (appliedCoupon) {
+      document.getElementById('coupon-code').value = appliedCoupon.code;
+      document.getElementById('remove-coupon').style.display = 'block';
+    }
+  } catch (e) {
+    console.error("Erro ao carregar cupom:", e);
+  }
+
+  // Event listeners para cupom
+  document.getElementById('apply-coupon').addEventListener('click', applyCoupon);
+  document.getElementById('remove-coupon').addEventListener('click', removeCoupon);
   exibirProdutos();
   atualizarCarrinho();
   
@@ -297,6 +316,25 @@ function atualizarCarrinho() {
   cartSubtotal.textContent = `R$ ${subtotal.toFixed(2)}`;
   cartTotal.textContent = `R$ ${subtotal.toFixed(2)}`;
   cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+  
+  let discount = 0;
+  if (appliedCoupon && appliedCoupon.discount) {
+    discount = subtotal * (appliedCoupon.discount / 100);
+  }
+
+  // Atualiza a exibição do desconto (ADICIONE ISSO)
+  const discountRow = document.querySelector('.discount-row');
+  if (discountRow) discountRow.remove();
+
+  if (appliedCoupon && discount > 0) {
+    const summary = document.querySelector('.cart-summary');
+    summary.insertAdjacentHTML('afterbegin', `
+      <div class="summary-row discount-row">
+        <span>Desconto (${appliedCoupon.code})</span>
+        <span>- R$ ${discount.toFixed(2)}</span>
+      </div>
+    `);
+  }
   
   // Mostrar/ocultar carrinho vazio
   if (cart.length > 0) {
@@ -713,7 +751,7 @@ document.getElementById('calcular-frete-btn').addEventListener('click', () => {
   
   // Atualiza o total
   const subtotal = parseFloat(document.getElementById('checkout-subtotal').textContent.replace('R$ ', '').replace(',', '.'));
-  const total = subtotal + valorFrete;
+  const total = subtotal + valorFrete - discount;
   document.getElementById('checkout-total').textContent = `R$ ${total.toFixed(2)}`;
   
   showToast(`Frete para ${cep}: R$ ${valorFrete.toFixed(2)}`);
@@ -839,4 +877,43 @@ function aplicarPromocao(produto) {
     return produto.preco * 0.9; // 10% de desconto
   }
   return produto.preco;
+}
+
+// Funções do sistema de cupom
+function applyCoupon() {
+  const couponCode = document.getElementById('coupon-code').value.trim().toUpperCase();
+  const messageEl = document.getElementById('coupon-message');
+  
+  messageEl.textContent = '';
+  messageEl.className = '';
+  
+  if (!couponCode) {
+    showMessage("Digite um código de cupom", "coupon-error");
+    return;
+  }
+  
+  if (validCoupons[couponCode]) {
+    appliedCoupon = { code: couponCode, ...validCoupons[couponCode] };
+    showMessage(`✔ Cupom aplicado! ${appliedCoupon.description}`, "coupon-applied");
+    document.getElementById('remove-coupon').style.display = 'block';
+    localStorage.setItem('appliedCoupon', JSON.stringify(appliedCoupon));
+    atualizarCarrinho();
+  } else {
+    showMessage("❌ Cupom inválido", "coupon-error");
+  }
+}
+
+function removeCoupon() {
+  appliedCoupon = null;
+  document.getElementById('coupon-code').value = '';
+  document.getElementById('coupon-message').textContent = '';
+  document.getElementById('remove-coupon').style.display = 'none';
+  localStorage.removeItem('appliedCoupon');
+  atualizarCarrinho();
+}
+
+function showMessage(text, className) {
+  const messageEl = document.getElementById('coupon-message');
+  messageEl.textContent = text;
+  messageEl.className = className;
 }

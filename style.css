@@ -971,3 +971,52 @@ header {
         gap: 5px;
     }
 }
+
+.coupon-section {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.coupon-input {
+  display: flex;
+  gap: 10px;
+}
+
+#coupon-code {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+#apply-coupon, #remove-coupon {
+  padding: 0 15px;
+  background: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#remove-coupon {
+  background: #e74c3c;
+}
+
+#coupon-message {
+  margin-top: 8px;
+  font-size: 13px;
+  min-height: 18px;
+}
+
+.coupon-applied {
+  color: #27ae60;
+}
+
+.coupon-error {
+  color: #e74c3c;
+}
+
+.discount-row {
+  color: #e74c3c;
+}

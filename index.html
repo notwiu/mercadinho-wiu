@@ -24,12 +24,7 @@
       </div>
     </div>
   </header>
-  <div class="notification-bar">
-        <div class="notification-content">
-            <i class="fas fa-truck"></i>
-            <span>Frete grátis acima de R$ 100 | Use o cupom <strong>BEMVINDO10</strong></span>
-        </div>
-    </div>
+  
   <div class="main-container">
     <section id="filtros">
       <div class="search-container">
@@ -76,6 +71,14 @@
     </div>
     
     <div class="cart-footer">
+      <div class="coupon-section">
+        <div class="coupon-input">
+          <input type="text" id="coupon-code" placeholder="Digite seu cupom">
+          <button id="apply-coupon">Aplicar</button>
+          <button id="remove-coupon" style="display:none;">Remover</button>
+        </div>
+        <div id="coupon-message"></div>
+      </div>
       <div class="cart-summary">
         <div class="summary-row">
           <span>Subtotal</span>
